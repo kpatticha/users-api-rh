@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161001113624) do
+ActiveRecord::Schema.define(version: 20161001143411) do
 
   create_table "locations", force: :cascade do |t|
     t.string  "street"
@@ -30,22 +30,22 @@ ActiveRecord::Schema.define(version: 20161001113624) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "gender"
-    t.string   "title"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "email"
-    t.string   "username"
-    t.string   "password"
-    t.string   "salt"
-    t.string   "md5"
-    t.string   "sha1"
-    t.string   "sha256"
-    t.datetime "registered"
-    t.integer  "dob"
-    t.string   "phone"
-    t.string   "cell"
-    t.string   "PPS"
+    t.string  "gender"
+    t.string  "title"
+    t.string  "first_name"
+    t.string  "last_name"
+    t.string  "email"
+    t.string  "username"
+    t.string  "password"
+    t.string  "salt"
+    t.string  "md5"
+    t.string  "sha1"
+    t.text    "sha256"
+    t.integer "registered"
+    t.integer "dob"
+    t.string  "phone"
+    t.string  "cell"
+    t.string  "PPS"
   end
 
 end
