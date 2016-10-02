@@ -23,7 +23,8 @@ users.each do |u|
 				 :registered => u['registered'],
 				 :dob => u['dob'],
 				 :phone => u['phone'],
-				 :cell => u['cell']	
+				 :cell => u['cell'],
+				 :PPS => u['PPS']
 	)
 
 	location = Location.create!(:street =>  location['street'], 
@@ -38,6 +39,5 @@ users.each do |u|
 				:medium => picture['medium'],
 				:thumbnail => picture['thumbnail']
 	)
-
 
 end
