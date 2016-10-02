@@ -7,7 +7,23 @@ module API
 			def index
 				@users = User.all
 				if @users
-					respond(@users)
+					available_columns = ['first_name', 'last_name', 'username']
+
+					if params[:sort].nil?
+						respond(@users)	
+					else
+						# in case the params are not set, set by defaul values
+						by = params[:by]? params[:by].upcase : "ASC"
+						column = params[:sort]? params[:sort] : "first_name"
+
+						# check if the requested param to be sorted is available
+						if available_columns.include? column
+							@sorted_users = @users.order("#{column} #{by}")
+							respond(@sorted_users)
+						else
+							render json: {:status => 400, :error => "#{column} is not a valid param for sorting. Try one of these #{available_columns}"}
+						end 
+					end #end of sorting check
 				else
 					# handle 404
 				end
@@ -59,10 +75,11 @@ module API
 			end
 
 			def update
-				@user = User.find(params[:id])
-					# render json: {:status => 400, :error => params['last_name']}
-					last_name = params['last_name']? params['last_name'] : @user.last_name
-					email = params['email']? params['email'] : @user.email
+					@user = User.find(params[:id])
+
+					# set the second variable if the first one is empty
+					last_name = params['last_name'] || @user.last_name
+					email = params['email'] || @user.email
 
 					if @user.update_attributes(:last_name => "#{last_name}", :email => "#{email}")
 						render json: {:status => 200, :message => "User with ID:#{@user.id} updated successfully"}
