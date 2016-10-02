@@ -14,6 +14,17 @@ module API
 
 			end
 
+			def show
+				@user = User.find(params[:id]) 
+
+				if @user
+					respond(@user)
+				else
+					# handle 404
+				end
+
+			end
+
 			def respond(data)
 				respond_to  do |format|
 					format.json { render json: data,  serializer: UserSerializer}
