@@ -1,24 +1,32 @@
-# README
+# Users API rh
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Users API rh is a ruby on rails project. Created to give you a RESTful API in order to handle information about many users. It supports all the CRUD operation. 
 
-Things you may want to cover:
+# API Documentation
 
-* Ruby version
+# Requirements
 
-* System dependencies
+* Ruby 2.2.2+
 
-* Configuration
+* Rails 5.0.0.1
 
-* Database creation
+* Rails GIT
 
-* Database initialization
 
-* How to run the test suite
+# Get Started
 
-* Services (job queues, cache servers, search engines, etc.)
+Clone the repository
+`git clone https://github.com/katerinapat/users-api-rh.git`
 
-* Deployment instructions
+Once you have cloned the repository, navigate to the project folder and run
+`bundle install`
 
-* ...
+Now setup and seed the database
+`rake db:setup`
+
+Start Application
+`rails s`
+
+
+
+
