@@ -89,6 +89,24 @@ module API
 
 			end
 
+			def search
+				u = User.arel_table
+				if params[:q]
+					query = params[:q]
+					 @data = User.where(u[:first_name].matches("%#{query}%").or(u[:last_name].matches("%#{query}%"))
+					 																												.or(u[:username].matches("%#{query}%")))
+
+					if @data.empty?
+						render json: {:status => 200, :message => "The are no records that match to query #{query}"}
+					else
+						respond(@data)
+					end
+				else
+					render json: {:status => 400, :error => "q params is missing"}
+				end
+					
+			end
+
 			def respond(data)
 				respond_to  do |format|
 					format.json { render json: data}
