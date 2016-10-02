@@ -25,9 +25,19 @@ module API
 
 			end
 
+			def destroy
+				@user = User.delete(params[:id])
+
+				if @user == 1 
+					render json: {:status => 200, :message => "User with ID:#{params[:id]} deleted successfully"}
+				else
+					render json: {:status => 404, :error => "User with ID:#{params[:id]} does not exist "}
+				end
+			end
+
 			def respond(data)
 				respond_to  do |format|
-					format.json { render json: data,  serializer: UserSerializer}
+					format.json { render json: data}
 				end
 			end
 
