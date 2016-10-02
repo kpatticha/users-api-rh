@@ -26,10 +26,12 @@ module API
 			end
 
 			def destroy
-				@user = User.delete(params[:id])
+				@user = User.destroy(params[:id])
 
-				if @user == 1 
-					render json: {:status => 200, :message => "User with ID:#{params[:id]} deleted successfully"}
+				unless @user.nil?
+					location = Location.where(:user_id => @user.id).destroy_all
+					picture = Picture.where(:user_id => @user.id).destroy_all
+					render json: {:status => 200, :message => "User with ID:#{@user.id} deleted successfully"}
 				else
 					render json: {:status => 404, :error => "User with ID:#{params[:id]} does not exist "}
 				end
