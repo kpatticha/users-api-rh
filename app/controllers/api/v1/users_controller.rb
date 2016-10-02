@@ -45,7 +45,7 @@ module API
 				if @user.save
 					# if street or city are set as params, then create a location associated to the user
 					if params['street'] || params['city']
-						
+
 						street = params['street']? params['street'] : nil
 						city = params['city']? params['city'] : nil
 
@@ -56,6 +56,20 @@ module API
 				else
 					render json: {:status => 400, :error => @user.errors}
 				end
+			end
+
+			def update
+				@user = User.find(params[:id])
+					# render json: {:status => 400, :error => params['last_name']}
+					last_name = params['last_name']? params['last_name'] : @user.last_name
+					email = params['email']? params['email'] : @user.email
+
+					if @user.update_attributes(:last_name => "#{last_name}", :email => "#{email}")
+						render json: {:status => 200, :message => "User with ID:#{@user.id} updated successfully"}
+					else
+						render json: {:status => 400, :error => @user.errors}
+					end
+
 			end
 
 			def respond(data)
