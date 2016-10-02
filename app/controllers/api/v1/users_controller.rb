@@ -37,6 +37,27 @@ module API
 				end
 			end
 
+			def create
+				# grap params and create new user
+				@user = User.new(:title => params["title"], :first_name => params['first_name'], :last_name => params['last'], :registered => params['registered'])
+				
+				# only if the validation that are set in the user model pass will save the object 
+				if @user.save
+					# if street or city are set as params, then create a location associated to the user
+					if params['street'] || params['city']
+						
+						street = params['street']? params['street'] : nil
+						city = params['city']? params['city'] : nil
+
+						location = Location.new(:street => street, :city => city, :user_id => @user.id )
+						location.save
+					end
+					render json: {:status => 200, :message => "User with ID:#{@user.id} created successfully"}
+				else
+					render json: {:status => 400, :error => @user.errors}
+				end
+			end
+
 			def respond(data)
 				respond_to  do |format|
 					format.json { render json: data}
