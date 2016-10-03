@@ -3,6 +3,7 @@
 Users API rh is a ruby on rails project. Created to give you a RESTful API in order to handle information about many users. It supports all the CRUD operation. 
 
 # API Documentation
+visit http://katerinapat.github.io/user-api-doc/
 
 # Requirements
 
